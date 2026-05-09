@@ -1,7 +1,7 @@
-import UploadVideo from "./components/UploadVideo";
+import { GetHighlightsApp } from "@/features/highlights/components/GetHighlightsApp";
 
 function App() {
-  return <UploadVideo />;
+  return <GetHighlightsApp />;
 }
 
 export default App;
