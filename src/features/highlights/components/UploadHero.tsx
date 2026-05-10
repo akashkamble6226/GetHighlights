@@ -23,7 +23,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
 import { formatFileSize } from "../lib/transcript";
-import { ProductStoryVisual } from "./ProductStoryVisual";
+import ProductStoryVisual from "./ProductStoryVisual";
 
 interface UploadHeroProps {
   errorMessage?: string;
@@ -105,7 +105,7 @@ export function UploadHero({
             </Badge>
 
             <h1 className="mt-6 text-4xl font-semibold leading-[1.02] text-balance text-foreground sm:text-5xl lg:text-6xl">
-              Transform long videos into searchable AI transcripts.
+              Transform short videos into searchable AI transcripts.
             </h1>
 
             <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
@@ -114,7 +114,7 @@ export function UploadHero({
               whole recording.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-2">
+            {/* <div className="mt-6 flex flex-wrap gap-2">
               {valueSteps.map((step, index) => (
                 <motion.span
                   animate={{ opacity: 1, y: 0 }}
@@ -129,10 +129,10 @@ export function UploadHero({
                   {step}
                 </motion.span>
               ))}
-            </div>
+            </div> */}
           </div>
 
-          {/* <ProductStoryVisual /> */}
+          <ProductStoryVisual />
         </div>
       </motion.article>
 
