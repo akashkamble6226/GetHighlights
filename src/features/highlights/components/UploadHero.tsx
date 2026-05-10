@@ -44,13 +44,6 @@ interface WorkflowStep {
   status: WorkflowStatus;
 }
 
-const valueSteps = [
-  "Upload videos",
-  "Extract speech",
-  "Review timestamps",
-  "Copy key moments",
-];
-
 export function UploadHero({
   errorMessage,
   hasTranscript,
@@ -114,22 +107,6 @@ export function UploadHero({
               whole recording.
             </p>
 
-            {/* <div className="mt-6 flex flex-wrap gap-2">
-              {valueSteps.map((step, index) => (
-                <motion.span
-                  animate={{ opacity: 1, y: 0 }}
-                  className="inline-flex items-center gap-2 rounded-md border bg-background/[0.58] px-3 py-2 text-xs font-semibold text-muted-foreground shadow-sm backdrop-blur"
-                  initial={{ opacity: 0, y: 8 }}
-                  key={step}
-                  transition={{ delay: 0.16 + index * 0.05, duration: 0.32 }}
-                >
-                  <span className="flex size-5 items-center justify-center rounded-sm bg-primary/[0.12] text-primary">
-                    {index + 1}
-                  </span>
-                  {step}
-                </motion.span>
-              ))}
-            </div> */}
           </div>
 
           <ProductStoryVisual />
