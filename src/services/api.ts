@@ -2,10 +2,9 @@ import axios, { type AxiosProgressEvent } from "axios";
 
 import type { UploadResponse } from "@/types/api";
 
-const baseURL = import.meta.env.VITE_API_URL || 
-  (typeof window !== 'undefined' && window.location.origin !== 'http://localhost:5173' 
-    ? window.location.origin 
-    : 'http://localhost:3000');
+// In production, VITE_API_URL must be set in Vercel env vars
+// In development, falls back to localhost:3000
+const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 export const api = axios.create({
   baseURL,
