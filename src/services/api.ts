@@ -5,7 +5,9 @@ import type { UploadResponse } from "@/types/api";
 // In production, uses VITE_API_URL from Vercel env vars
 // Fallback to Railway backend if env var not set
 // In development, falls back to localhost:3000
-const baseURL = import.meta.env.VITE_API_URL || "https://gethighlights-production.up.railway.app";
+const baseURL = (
+  import.meta.env.VITE_API_URL || "https://gethighlights-production.up.railway.app"
+).replace(/\/$/, "");
 
 console.log("API Base URL:", baseURL);
 
@@ -21,9 +23,6 @@ export async function uploadVideo(
   formData.append("video", file);
 
   const response = await api.post<UploadResponse>("/upload", formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
     onUploadProgress: (progressEvent: AxiosProgressEvent) => {
       if (!progressEvent.total) {
         onProgress?.(18);
