@@ -5,9 +5,12 @@ import type { UploadResponse } from "@/types/api";
 // In production, uses VITE_API_URL from Vercel env vars
 // Fallback to Railway backend if env var not set
 // In development, falls back to localhost:3000
-const baseURL = (
-  import.meta.env.VITE_API_URL || "https://gethighlights-production.up.railway.app"
-).replace(/\/$/, "");
+// const baseURL = (
+//   import.meta.env.VITE_API_URL || "https://gethighlights-production.up.railway.app"
+// ).replace(/\/$/, "");
+// gethighlights-production.up.railway.app
+// "http://localhost:3000"
+const baseURL = "gethighlights.up.railway.app";
 
 console.log("API Base URL:", baseURL);
 
