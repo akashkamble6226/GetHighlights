@@ -1,6 +1,6 @@
 # 🎬 Get Highlights
 
-> Transform long videos into concise AI-powered highlights, transcripts, and insights.
+> Transform small videos into concise AI-powered highlights, transcripts, and insights.
 
 <div align="center">
 
