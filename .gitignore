@@ -18,6 +18,9 @@ build
 # Local env files
 *.local
 .env
+.env.local
+.env.production
+.env.test-railway
 
 # Uploads
 uploads

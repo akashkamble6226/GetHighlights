@@ -2,15 +2,27 @@ import axios, { type AxiosProgressEvent } from "axios";
 
 import type { UploadResponse } from "@/types/api";
 
-// In production, uses VITE_API_URL from Vercel env vars
-// Fallback to Railway backend if env var not set
-// In development, falls back to localhost:3000
-// const baseURL = (
-//   import.meta.env.VITE_API_URL || "https://gethighlights-production.up.railway.app"
-// ).replace(/\/$/, "");
-// gethighlights-production.up.railway.app
-// "http://localhost:3000"
-const baseURL = "gethighlights.up.railway.app";
+// Determine the base URL based on environment variables
+// Priority:
+// 1. VITE_API_URL environment variable (from .env files)
+// 2. Fallback to localhost:3000 in development
+// 3. Fallback to Railway production URL
+const getBaseURL = () => {
+  // First priority: VITE_API_URL from environment
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL.replace(/\/$/, "");
+  }
+
+  // Second priority: localhost development
+  if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+    return "http://localhost:3000";
+  }
+
+  // Third priority: Railway production as fallback
+  return "https://gethighlights.up.railway.app";
+};
+
+const baseURL = getBaseURL();
 
 console.log("API Base URL:", baseURL);
 
