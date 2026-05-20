@@ -7,7 +7,7 @@
 ![React](https://img.shields.io/badge/Frontend-React.js-61DAFB?style=for-the-badge\&logo=react)
 ![NestJS](https://img.shields.io/badge/Backend-NestJS-E0234E?style=for-the-badge\&logo=nestjs)
 ![TypeScript](https://img.shields.io/badge/Language-TypeScript-3178C6?style=for-the-badge\&logo=typescript)
-![Railway](https://img.shields.io/badge/Deployment-Railway-0B0D0E?style=for-the-badge\&logo=railway)
+![Render](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render&logoColor=black)
 ![Vercel](https://img.shields.io/badge/Hosting-Vercel-000000?style=for-the-badge\&logo=vercel)
 
 </div>
@@ -16,11 +16,11 @@
 
 ## ✨ Overview
 
-**Get Highlights** is an AI-powered full stack application that helps users extract meaningful highlights from audio and video content.
+**Get Highlights** is an AI-powered full stack application that helps users extract meaningful highlights video content.
 
 The platform processes uploaded media, generates transcripts, identifies key moments, and presents them in a clean and interactive interface.
 
-Whether it's podcasts, interviews, lectures, meetings, or long-form content — Get Highlights helps users consume information faster.
+Whether it's podcasts, interviews, lectures, meetings, or short-form content — Get Highlights helps users consume information faster.
 
 ---
 
@@ -64,7 +64,7 @@ Whether it's podcasts, interviews, lectures, meetings, or long-form content — 
 ## Deployment & DevOps
 
 * ▲ Vercel
-* 🚂 Railway
+* 🚂 Render
 * 🔄 CI/CD Pipelines
 * 🌐 Environment Configuration
 
@@ -72,7 +72,7 @@ Whether it's podcasts, interviews, lectures, meetings, or long-form content — 
 
 # 🔥 Features
 
-* 🎥 Upload audio/video files
+* 🎥 Upload video files
 * ✨ AI-powered highlight extraction
 * 📝 Automatic transcript generation
 * ⚡ Fast and responsive UI
@@ -88,7 +88,7 @@ Whether it's podcasts, interviews, lectures, meetings, or long-form content — 
 ```text
 Upload Media
       ↓
-Audio/Video Processing
+Video Processing
       ↓
 AI Transcript Generation
       ↓
@@ -182,13 +182,11 @@ FRONTEND_URL=http://localhost:5173
 Deploy easily using:
 
 * ▲ Vercel
-* Netlify
 
 ## Backend Deployment
 
 Deploy easily using:
 
-* 🚂 Railway
 * Render
 * AWS
 
@@ -209,7 +207,7 @@ Deploy easily using:
 # 🧪 Challenges Solved
 
 * Efficient media upload handling
-* Managing large transcript data
+* Managing small transcript data
 * Cross-origin API communication
 * Optimized frontend performance
 * Scalable backend architecture
