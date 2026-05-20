@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-
+import * as path from 'path';
 import { nodewhisper } from 'nodejs-whisper';
 
 @Injectable()
@@ -29,9 +29,12 @@ export class TranscriptionService {
   }
 
   async transcribeAudio(audioPath: string) {
+    // Use custom model path from /models directory (pre-downloaded to avoid re-downloading)
+    const modelRootPath = path.join(process.cwd(), 'models');
+
     const result = await nodewhisper(audioPath, {
-      modelName: "tiny.en",
-      autoDownloadModelName: undefined,
+      modelName: 'tiny.en',
+      modelRootPath: modelRootPath,
       removeWavFileAfterTranscription: false,
       withCuda: false,
     });
