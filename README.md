@@ -1,73 +1,255 @@
-# React + TypeScript + Vite
+# 🎬 Get Highlights
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Transform long videos into concise AI-powered highlights, transcripts, and insights.
 
-Currently, two official plugins are available:
+<div align="center">
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![React](https://img.shields.io/badge/Frontend-React.js-61DAFB?style=for-the-badge\&logo=react)
+![NestJS](https://img.shields.io/badge/Backend-NestJS-E0234E?style=for-the-badge\&logo=nestjs)
+![TypeScript](https://img.shields.io/badge/Language-TypeScript-3178C6?style=for-the-badge\&logo=typescript)
+![Railway](https://img.shields.io/badge/Deployment-Railway-0B0D0E?style=for-the-badge\&logo=railway)
+![Vercel](https://img.shields.io/badge/Hosting-Vercel-000000?style=for-the-badge\&logo=vercel)
 
-## React Compiler
+</div>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Overview
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Get Highlights** is an AI-powered full stack application that helps users extract meaningful highlights from audio and video content.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The platform processes uploaded media, generates transcripts, identifies key moments, and presents them in a clean and interactive interface.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Whether it's podcasts, interviews, lectures, meetings, or long-form content — Get Highlights helps users consume information faster.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🚀 Live Demo
+
+🌐 **Website:** [https://get-highlights-gclv.vercel.app/](https://get-highlights-gclv.vercel.app/)
+
+---
+
+# 📸 Preview
+
+> Add screenshots or GIFs here
+
+```md
+/assets/home.png
+/assets/upload.png
+/assets/transcript.png
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+# 🛠️ Tech Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Frontend
+
+* ⚛️ React.js
+* ⚡ Vite
+* 🎨 Tailwind CSS
+* 🧠 TypeScript
+* 🔄 Axios
+* 🎞️ Framer Motion
+
+## Backend
+
+* 🛡️ NestJS
+* 🟢 Node.js
+* 🔐 REST APIs
+* 📁 File Upload Handling
+* 🌍 CORS Configuration
+
+## Deployment & DevOps
+
+* ▲ Vercel
+* 🚂 Railway
+* 🔄 CI/CD Pipelines
+* 🌐 Environment Configuration
+
+---
+
+# 🔥 Features
+
+* 🎥 Upload audio/video files
+* ✨ AI-powered highlight extraction
+* 📝 Automatic transcript generation
+* ⚡ Fast and responsive UI
+* 🌙 Modern and clean user experience
+* 📱 Fully responsive design
+* 🔄 Real-time processing flow
+* ☁️ Cloud deployment ready
+
+---
+
+# 🧠 Application Flow
+
+```text
+Upload Media
+      ↓
+Audio/Video Processing
+      ↓
+AI Transcript Generation
+      ↓
+Highlight Detection
+      ↓
+Structured Output & Insights
 ```
+
+---
+
+# 📂 Project Structure
+
+```bash
+get-highlights/
+│
+├── frontend/
+│   ├── src/
+│   ├── components/
+│   ├── pages/
+│   └── services/
+│
+├── backend/
+│   ├── src/
+│   ├── modules/
+│   ├── controllers/
+│   └── services/
+│
+└── README.md
+```
+
+---
+
+# ⚙️ Installation
+
+## 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/your-username/get-highlights.git
+cd get-highlights
+```
+
+---
+
+## 2️⃣ Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend runs on:
+
+```bash
+http://localhost:5173
+```
+
+---
+
+## 3️⃣ Backend Setup
+
+```bash
+cd backend
+npm install
+npm run start:dev
+```
+
+Backend runs on:
+
+```bash
+http://localhost:3000
+```
+
+---
+
+# 🔑 Environment Variables
+
+Create a `.env` file in the backend:
+
+```env
+PORT=3000
+FRONTEND_URL=http://localhost:5173
+```
+
+---
+
+# 🚀 Deployment
+
+## Frontend Deployment
+
+Deploy easily using:
+
+* ▲ Vercel
+* Netlify
+
+## Backend Deployment
+
+Deploy easily using:
+
+* 🚂 Railway
+* Render
+* AWS
+
+---
+
+# 📈 Future Enhancements
+
+* 🎙️ Multi-language transcription
+* 🤖 Smarter AI summarization
+* 📊 Analytics dashboard
+* 👥 User authentication
+* ☁️ Cloud storage integration
+* 📥 Export highlights as PDF/Text
+* 🎬 Video clipping support
+
+---
+
+# 🧪 Challenges Solved
+
+* Efficient media upload handling
+* Managing large transcript data
+* Cross-origin API communication
+* Optimized frontend performance
+* Scalable backend architecture
+
+---
+
+# 💡 Why This Project?
+
+Long-form content is everywhere, but attention spans are limited.
+
+Get Highlights was built to simplify content consumption by automatically extracting valuable insights from lengthy media files.
+
+The goal is to save time, improve accessibility, and make information easier to consume.
+
+---
+
+# 👨‍💻 Author
+
+## Akash Kamble
+
+Full Stack Developer passionate about building scalable applications using React, NestJS, TypeScript, and modern cloud technologies.
+
+* 💼 Application Development Analyst
+* ⚛️ React.js Developer
+* 🛠️ Full Stack Engineer
+
+---
+
+# ⭐ Support
+
+If you like this project:
+
+* ⭐ Star the repository
+* 🍴 Fork the project
+* 🛠️ Contribute improvements
+
+---
+
+<div align="center">
+
+## 🚀 Built with passion, creativity, and modern web technologies.
+
+</div>
