@@ -6,7 +6,7 @@ const defaultAllowedOrigins = [
   'http://localhost:4173',
   'http://localhost:3000',
   'https://get-highlights-gclv.vercel.app',
-  'https://gethighlights.up.railway.app',
+  'https://gethighlights.onrender.com',
 ];
 
 const vercelPreviewOriginPattern =

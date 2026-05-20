@@ -6,7 +6,7 @@ import type { UploadResponse } from "@/types/api";
 // Priority:
 // 1. VITE_API_URL environment variable (from .env files)
 // 2. Fallback to localhost:3000 in development
-// 3. Fallback to Railway production URL
+// 3. Fallback to Render production URL
 const getBaseURL = () => {
   // First priority: VITE_API_URL from environment
   if (import.meta.env.VITE_API_URL) {
@@ -18,8 +18,8 @@ const getBaseURL = () => {
     return "http://localhost:3000";
   }
 
-  // Third priority: Railway production as fallback
-  return "https://gethighlights.up.railway.app";
+  // Third priority: Render production as fallback
+  return "https://gethighlights.onrender.com";
 };
 
 const baseURL = getBaseURL();
