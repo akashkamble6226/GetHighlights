@@ -35,6 +35,7 @@ src/backend/node_modules/nodejs-whisper/cpp/whisper.cpp/build
 *.mp3
 *.wav
 *.mp4
+!public/sample-videos/sample.mp4
 
 # Editor directories and files
 .vscode/*
