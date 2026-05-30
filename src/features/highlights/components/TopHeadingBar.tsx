@@ -1,8 +1,11 @@
-import { AudioLines } from "lucide-react";
+import { AudioLines, BookOpen, Download } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
 import { ThemeControl } from "./ThemeControl";
+
+const docsUrl = "https://github.com/akashkamble6226/GetHighlights";
+const sampleVideoPath = "/sample-videos/sample.mp4";
 
 export function TopHeadingBar() {
   return (
@@ -27,11 +30,23 @@ export function TopHeadingBar() {
 
         <nav aria-label="Workspace navigation" className="flex items-center gap-2">
           <div className="hidden items-center gap-1 md:flex">
-            <Button asChild size="sm" variant="ghost">
+            {/* <Button asChild size="sm" variant="ghost">
               <a href="#workflow">Workflow</a>
             </Button>
             <Button asChild size="sm" variant="ghost">
               <a href="#transcript-review">Transcript</a>
+            </Button> */}
+            <Button asChild size="sm" variant="ghost">
+              <a href={docsUrl} rel="noreferrer" target="_blank">
+                <BookOpen aria-hidden="true" />
+                Docs
+              </a>
+            </Button>
+            <Button asChild size="sm" variant="outline">
+              <a download="sample.mp4" href={sampleVideoPath}>
+                <Download aria-hidden="true" />
+                Sample
+              </a>
             </Button>
           </div>
           <ThemeControl />

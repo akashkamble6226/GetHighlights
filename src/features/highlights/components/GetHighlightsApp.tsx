@@ -8,6 +8,7 @@ import type { UploadResponse } from "@/types/api";
 import { TopHeadingBar } from "./TopHeadingBar";
 import { TranscriptTimeline } from "./TranscriptTimeline";
 import { UploadHero } from "./UploadHero";
+import { BottomFooter } from "./BottomFooter";
 
 function getUploadErrorMessage(error: unknown) {
   if (axios.isAxiosError(error)) {
@@ -119,6 +120,7 @@ export function GetHighlightsApp() {
           segments={segments}
         />
       </main>
+      <BottomFooter />
     </div>
   );
 }
