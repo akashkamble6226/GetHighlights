@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export type ThemePreference = "light" | "dark" | "system";
+export type ThemePreference = "light" | "dark";
 
 const themeStorageKey = "gethighlights-theme";
 
@@ -11,32 +11,20 @@ interface UiState {
 
 function readStoredTheme(): ThemePreference {
   if (typeof window === "undefined") {
-    return "system";
+    return "light";
   }
 
   const storedTheme = window.localStorage.getItem(themeStorageKey);
 
-  if (
-    storedTheme === "light" ||
-    storedTheme === "dark" ||
-    storedTheme === "system"
-  ) {
+  if (storedTheme === "light" || storedTheme === "dark") {
     return storedTheme;
   }
 
-  return "system";
+  return "light";
 }
 
 export function getResolvedTheme(theme: ThemePreference) {
-  if (theme !== "system") {
-    return theme;
-  }
-
-  if (typeof window === "undefined") {
-    return "light";
-  }
-
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return theme;
 }
 
 export function applyThemePreference(theme: ThemePreference) {

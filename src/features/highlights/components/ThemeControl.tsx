@@ -8,8 +8,8 @@ const themeOptions: {
   value: ThemePreference;
   icon: typeof Sun;
 }[] = [
-  { label: "Light", value: "light", icon: Sun },
-  { label: "Dark", value: "dark", icon: Moon },
+  { label: "Day", value: "light", icon: Sun },
+  { label: "Night", value: "dark", icon: Moon },
 ];
 
 export function ThemeControl() {
