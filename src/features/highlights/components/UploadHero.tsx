@@ -13,7 +13,7 @@ import {
   Wand2,
   X,
 } from "lucide-react";
-import { useId, useMemo, useState } from "react";
+import { useId, useMemo, useRef, useState } from "react";
 
 import heroLayer from "@/assets/hero.png";
 import { Badge } from "@/components/ui/badge";
@@ -22,8 +22,10 @@ import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
-import { formatFileSize } from "../lib/transcript";
+import { formatDuration, formatFileSize } from "../lib/transcript";
 import ProductStoryVisual from "./ProductStoryVisual";
+
+const longVideoWarningSeconds = 13;
 
 interface UploadHeroProps {
   errorMessage?: string;
@@ -55,6 +57,10 @@ export function UploadHero({
 }: UploadHeroProps) {
   const inputId = useId();
   const [isDragging, setIsDragging] = useState(false);
+  const [fileNotice, setFileNotice] = useState<string | null>(null);
+  const [fileNoticeType, setFileNoticeType] = useState<"error" | "warning">("warning");
+  const [isCheckingVideo, setIsCheckingVideo] = useState(false);
+  const durationCheckId = useRef(0);
 
   const workflowSteps = useMemo(
     () =>
@@ -67,13 +73,55 @@ export function UploadHero({
     [hasTranscript, isUploading, progress, selectedFile],
   );
 
-  const acceptFile = (file: File | undefined) => {
+  const acceptFile = async (file: File | undefined) => {
     if (!file) {
       return;
     }
 
-    if (file.type.startsWith("video/")) {
-      onFileSelect(file);
+    if (!file.type.startsWith("video/")) {
+      durationCheckId.current += 1;
+      setFileNoticeType("error");
+      setFileNotice("Select a video file to continue.");
+      setIsCheckingVideo(false);
+      onFileSelect(null);
+      return;
+    }
+
+    const checkId = durationCheckId.current + 1;
+    durationCheckId.current = checkId;
+    setFileNotice(null);
+    setIsCheckingVideo(true);
+    onFileSelect(file);
+
+    try {
+      const duration = await readVideoDuration(file);
+
+      if (checkId !== durationCheckId.current) {
+        return;
+      }
+
+      if (duration > longVideoWarningSeconds) {
+        setFileNoticeType("warning");
+        setFileNotice(
+          `Longer videos can take more time to upload and transcribe. "${file.name}" is ${formatDuration(duration)}, so processing may take a while.`,
+        );
+        return;
+      }
+
+      setFileNotice(null);
+    } catch {
+      if (checkId !== durationCheckId.current) {
+        return;
+      }
+
+      setFileNoticeType("warning");
+      setFileNotice(
+        "This video is ready to upload. Longer videos may take more time to process.",
+      );
+    } finally {
+      if (checkId === durationCheckId.current) {
+        setIsCheckingVideo(false);
+      }
     }
   };
 
@@ -161,14 +209,18 @@ export function UploadHero({
           onDrop={(event) => {
             event.preventDefault();
             setIsDragging(false);
-            acceptFile(event.dataTransfer.files[0]);
+            void acceptFile(event.dataTransfer.files[0]);
           }}
         >
           <input
             accept="video/*"
             className="sr-only"
             id={inputId}
-            onChange={(event) => acceptFile(event.target.files?.[0])}
+            onChange={(event) => {
+              const file = event.currentTarget.files?.[0];
+              event.currentTarget.value = "";
+              void acceptFile(file);
+            }}
             type="file"
           />
           <motion.span
@@ -186,6 +238,28 @@ export function UploadHero({
           </p>
         </label>
 
+        {fileNotice ? (
+          <div
+            aria-live="assertive"
+            className={cn(
+              "mt-4 flex gap-3 rounded-md border p-3 text-sm",
+              fileNoticeType === "error"
+                ? "border-destructive/25 bg-destructive/10 text-destructive"
+                : "border-amber-500/35 bg-amber-500/10 text-foreground",
+            )}
+            role="alert"
+          >
+            <AlertTriangle
+              aria-hidden="true"
+              className={cn(
+                "mt-0.5 size-4 shrink-0",
+                fileNoticeType === "warning" ? "text-amber-600 dark:text-amber-300" : "",
+              )}
+            />
+            <p>{fileNotice}</p>
+          </div>
+        ) : null}
+
         <div className="mt-5 rounded-lg border bg-background/[0.58] p-4">
           <div className="flex items-start justify-between gap-3">
             <div className="flex min-w-0 items-start gap-3">
@@ -201,10 +275,16 @@ export function UploadHero({
               </div>
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold">
-                  {selectedFile ? selectedFile.name : "No video selected"}
+                  {isCheckingVideo
+                    ? "Checking video duration"
+                    : selectedFile
+                      ? selectedFile.name
+                      : "No video selected"}
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  {selectedFile
+                  {isCheckingVideo
+                    ? "Checking whether this video may take longer to process"
+                    : selectedFile
                     ? `${formatFileSize(selectedFile.size)} ready for upload`
                     : "Select one source to begin"}
                 </p>
@@ -214,7 +294,12 @@ export function UploadHero({
             {selectedFile ? (
               <Button
                 aria-label="Clear selected video"
-                onClick={() => onFileSelect(null)}
+                onClick={() => {
+                  durationCheckId.current += 1;
+                  setFileNotice(null);
+                  setIsCheckingVideo(false);
+                  onFileSelect(null);
+                }}
                 size="iconSm"
                 type="button"
                 variant="ghost"
@@ -282,6 +367,37 @@ export function UploadHero({
       </motion.article>
     </section>
   );
+}
+
+function readVideoDuration(file: File) {
+  return new Promise<number>((resolve, reject) => {
+    const video = document.createElement("video");
+    const objectUrl = URL.createObjectURL(file);
+
+    const cleanup = () => {
+      URL.revokeObjectURL(objectUrl);
+      video.removeAttribute("src");
+      video.load();
+    };
+
+    video.preload = "metadata";
+    video.onloadedmetadata = () => {
+      const { duration } = video;
+      cleanup();
+
+      if (Number.isFinite(duration)) {
+        resolve(duration);
+        return;
+      }
+
+      reject(new Error("Video duration is unavailable."));
+    };
+    video.onerror = () => {
+      cleanup();
+      reject(new Error("Video metadata could not be loaded."));
+    };
+    video.src = objectUrl;
+  });
 }
 
 function buildWorkflowSteps({

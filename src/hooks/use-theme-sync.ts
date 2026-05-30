@@ -7,18 +7,5 @@ export function useThemeSync() {
 
   useEffect(() => {
     applyThemePreference(theme);
-
-    if (theme !== "system") {
-      return undefined;
-    }
-
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const syncSystemTheme = () => applyThemePreference("system");
-
-    mediaQuery.addEventListener("change", syncSystemTheme);
-
-    return () => {
-      mediaQuery.removeEventListener("change", syncSystemTheme);
-    };
   }, [theme]);
 }
