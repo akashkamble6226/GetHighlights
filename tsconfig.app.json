@@ -27,6 +27,6 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "vite.config.ts", "vite-env.d.ts"],
   "exclude": ["src/backend"]
 }
